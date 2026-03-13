@@ -1,6 +1,6 @@
 import { createContext, useContext, useEffect, useState } from 'react';
 
-const CartContext = createContext();
+export const CartContext = createContext();
 const CART_STORAGE_KEY = 'shopzone_cart_items';
 
 export function CartProvider({ children }) {
