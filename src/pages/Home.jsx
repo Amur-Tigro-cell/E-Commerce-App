@@ -1,5 +1,13 @@
+import { useMemo } from 'react';
 import ProductCard from '../components/ProductCard';
+import RecommendationSection from '../components/RecommendationSection';
 import products from '../data/products';
+import {
+  getRecommendedProducts,
+  getRecentlyViewedProducts,
+  getTrendingProducts,
+  getViewedProductIds,
+} from '../utils/recommendations';
 
 const CATEGORIES = [
   { name: 'Electronics', icon: '💻', desc: 'Gadgets & Tech' },
@@ -8,8 +16,18 @@ const CATEGORIES = [
   { name: 'Sports', icon: '🏃', desc: 'Fitness & Exercise' },
 ];
 
-function Home({ onNavigate }) {
+function Home({ onNavigate, onQuickView }) {
   const featured = products.slice(0, 8);
+  const viewedIds = useMemo(() => getViewedProductIds(), []);
+  const recentlyViewed = useMemo(
+    () => getRecentlyViewedProducts(products, viewedIds, 10),
+    [viewedIds]
+  );
+  const recommendedForYou = useMemo(
+    () => getRecommendedProducts(products, viewedIds, 10),
+    [viewedIds]
+  );
+  const trendingProducts = useMemo(() => getTrendingProducts(products, 10), []);
 
   return (
     <main className="page-main">
@@ -113,10 +131,35 @@ function Home({ onNavigate }) {
               key={product.id}
               product={product}
               onNavigate={onNavigate}
+              onQuickView={onQuickView}
             />
           ))}
         </div>
       </section>
+
+      <RecommendationSection
+        title="Recommended for you"
+        subtitle="Based on products you've explored"
+        products={recommendedForYou}
+        onNavigate={onNavigate}
+        emptyText="Start exploring products and we will personalize recommendations for you."
+      />
+
+      <RecommendationSection
+        title="Recently viewed products"
+        subtitle="Pick up where you left off"
+        products={recentlyViewed}
+        onNavigate={onNavigate}
+        emptyText="You haven't viewed any products yet."
+      />
+
+      <RecommendationSection
+        title="Trending products"
+        subtitle="Popular picks shoppers love right now"
+        products={trendingProducts}
+        onNavigate={onNavigate}
+        emptyText="No trending products available right now."
+      />
 
       {/* Promo Banner */}
       <section className="promo-banner">

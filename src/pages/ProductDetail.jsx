@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { useCart } from '../context/CartContext';
 import products from '../data/products';
 import ProductCard from '../components/ProductCard';
@@ -6,11 +6,33 @@ import ProductCard from '../components/ProductCard';
 const renderStars = (rating) =>
   [...Array(5)].map((_, i) => (i + 0.5 <= rating ? '★' : '☆')).join('');
 
-function ProductDetail({ productId, onNavigate }) {
+function ProductDetail({ productId, onNavigate, onQuickView }) {
   const product = products.find((p) => p.id === productId);
   const { addToCart } = useCart();
   const [quantity, setQuantity] = useState(1);
   const [added, setAdded] = useState(false);
+  const galleryImages = useMemo(() => {
+    if (!product) {
+      return [];
+    }
+
+    return [
+      product.image,
+      `https://picsum.photos/seed/${product.id}-gallery-1/900/900`,
+      `https://picsum.photos/seed/${product.id}-gallery-2/900/900`,
+      `https://picsum.photos/seed/${product.id}-gallery-3/900/900`,
+    ];
+  }, [product]);
+  const [activeImage, setActiveImage] = useState('');
+
+  useEffect(() => {
+    setActiveImage(galleryImages[0] || '');
+  }, [galleryImages]);
+
+  useEffect(() => {
+    setQuantity(1);
+    setAdded(false);
+  }, [productId]);
 
   if (!product) {
     return (
@@ -43,12 +65,34 @@ function ProductDetail({ productId, onNavigate }) {
       </button>
 
       <div className="detail-container">
-        <div className="detail-image-wrap">
-          <img
-            src={product.image}
-            alt={product.name}
-            className="detail-image"
-          />
+        <div className="detail-gallery">
+          <div className="detail-image-wrap">
+            <img
+              src={activeImage || product.image}
+              alt={product.name}
+              className="detail-image"
+            />
+          </div>
+
+          <div className="detail-thumbnails">
+            {galleryImages.map((image, index) => (
+              <button
+                key={image}
+                type="button"
+                className={`detail-thumb-btn ${
+                  image === activeImage ? 'active' : ''
+                }`}
+                onClick={() => setActiveImage(image)}
+                aria-label={`View image ${index + 1}`}
+              >
+                <img
+                  src={image}
+                  alt={`${product.name} thumbnail ${index + 1}`}
+                  className="detail-thumb-image"
+                />
+              </button>
+            ))}
+          </div>
         </div>
 
         <div className="detail-info">
@@ -103,7 +147,12 @@ function ProductDetail({ productId, onNavigate }) {
           <h2>You May Also Like</h2>
           <div className="products-grid">
             {related.map((p) => (
-              <ProductCard key={p.id} product={p} onNavigate={onNavigate} />
+              <ProductCard
+                key={p.id}
+                product={p}
+                onNavigate={onNavigate}
+                onQuickView={onQuickView}
+              />
             ))}
           </div>
         </section>
