@@ -1,16 +1,50 @@
-# React + Vite
+# E-Commerce-App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern, responsive e-commerce web application built with React and Vite. This project features advanced UI components, robust shopping cart and wishlist systems, and Amazon-style design elements.
 
-Currently, two official plugins are available:
+## Features
+- Amazon-style sticky navigation bar
+- Advanced product filtering and quick view modal
+- Product detail page with image gallery, zoom, and purchase box
+- Wishlist system with LocalStorage persistence
+- Modern product cards with skeleton loading screens
+- User account dashboard UI
+- Full shopping cart system: add/remove items, quantity controls, slide-out sidebar, subtotal calculation, LocalStorage
+- Responsive design for all devices (mobile, tablet, desktop)
+- Clean, modern e-commerce UI styling
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Tech Stack
+- React (JSX)
+- Vite
+- CSS (custom, responsive, modern)
+- LocalStorage for cart and wishlist
+- Context Providers for state management
 
-## React Compiler
+## Getting Started
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/Amur-Tigro-cell/E-Commerce-App.git
+   ```
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+3. Start the development server:
+   ```bash
+   npm run dev
+   ```
+4. Build for production:
+   ```bash
+   npm run build
+   ```
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Deployment
+- Netlify and Render supported
+- Build command: `vite build`
+- Publish directory: `dist`
 
-## Expanding the ESLint configuration
+## License
+MIT
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+---
+For questions or feedback, open an issue or contact the repository owner.
