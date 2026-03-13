@@ -1,0 +1,125 @@
+.amazon-navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #232f3e;
+  color: #fff;
+  padding: 10px 20px;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+.logo {
+  height: 40px;
+  margin-right: 16px;
+}
+.delivery {
+  display: flex;
+  flex-direction: column;
+  margin-right: 24px;
+}
+.delivery-label {
+  font-size: 12px;
+  color: #ccc;
+}
+.delivery-location {
+  font-size: 14px;
+  font-weight: bold;
+}
+.navbar-center {
+  display: flex;
+  flex: 1;
+  max-width: 600px;
+}
+.category-dropdown {
+  padding: 8px;
+  border: none;
+  border-radius: 4px 0 0 4px;
+  background: #f3f3f3;
+  color: #333;
+}
+.search-bar {
+  flex: 1;
+  padding: 8px;
+  border: none;
+  outline: none;
+}
+.search-btn {
+  background: #febd69;
+  border: none;
+  border-radius: 0 4px 4px 0;
+  padding: 8px 16px;
+  cursor: pointer;
+}
+.search-icon {
+  font-size: 18px;
+}
+.navbar-right {
+  display: flex;
+  align-items: center;
+}
+.account-dropdown, .orders-dropdown {
+  position: relative;
+  margin-right: 24px;
+  cursor: pointer;
+}
+.account-dropdown:hover .dropdown-content,
+.orders-dropdown:hover .dropdown-content {
+  display: block;
+}
+.dropdown-content {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background: #fff;
+  color: #232f3e;
+  min-width: 150px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  border-radius: 4px;
+  z-index: 1001;
+}
+.dropdown-content a {
+  display: block;
+  padding: 10px;
+  text-decoration: none;
+  color: #232f3e;
+}
+.dropdown-content a:hover {
+  background: #f3f3f3;
+}
+.cart {
+  position: relative;
+  margin-left: 16px;
+}
+.cart-icon {
+  font-size: 24px;
+}
+.cart-count {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  background: #ff3e3e;
+  color: #fff;
+  border-radius: 50%;
+  padding: 2px 6px;
+  font-size: 12px;
+}
+@media (max-width: 768px) {
+  .amazon-navbar {
+    flex-direction: column;
+    align-items: stretch;
+    padding: 8px;
+  }
+  .navbar-center {
+    max-width: 100%;
+    margin: 8px 0;
+  }
+  .navbar-right {
+    justify-content: flex-end;
+  }
+  .logo {
+    height: 32px;
+  }
+}

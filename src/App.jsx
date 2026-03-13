@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { CartProvider } from './context/CartContext';
 import { WishlistProvider } from './context/WishlistContext';
-import Header from './components/Header';
+import AmazonNavbar from './components/AmazonNavbar';
 import Footer from './components/Footer';
 import FloatingCart from './components/FloatingCart';
 import QuickViewModal from './components/QuickViewModal';
@@ -68,11 +68,8 @@ function App() {
     <WishlistProvider>
       <CartProvider>
         <div className="app-wrapper">
-          <Header
-            currentPage={currentPage}
-            onNavigate={navigate}
-            onCartClick={() => setIsCartOpen(true)}
-          />
+            {/* Amazon-style Navbar replaces Header */}
+            <AmazonNavbar />
           {renderPage()}
           <Footer onNavigate={navigate} />
           <FloatingCart
